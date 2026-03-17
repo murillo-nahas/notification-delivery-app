@@ -1,14 +1,21 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { HealthModule } from './health/health.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { NotificationEntity } from './modules/notifications/entities/notification.entity';
+import { UserEntity } from './modules/users/entities/user.entity';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
+  imports: [ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+  TypeOrmModule.forRootAsync({
+    imports: [ConfigModule],
+    useFactory: (configService: ConfigService) => ({
+      type: 'postgres',
+      url: configService.get('DATABASE_URL'),
+      entities: [UserEntity, NotificationEntity],
+      synchronize: true,
     }),
-    HealthModule,
+    inject: [ConfigService],
+  }),
   ],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,5 +1,5 @@
 import { UserEntity } from "@/modules/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export enum NotificationStatus {
   PENDING = 'PENDING',
@@ -37,7 +37,7 @@ export class NotificationEntity {
   @Column({ type: 'enum', enum: NotificationStatus, default: NotificationStatus.PENDING })
   status: NotificationStatus;
 
-  @UpdateDateColumn()
+  @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()

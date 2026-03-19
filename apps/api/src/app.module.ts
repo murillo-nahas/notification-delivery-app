@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NotificationEntity } from './modules/notifications/entities/notification.entity';
 import { UserEntity } from './modules/users/entities/user.entity';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
@@ -16,6 +17,7 @@ import { UserEntity } from './modules/users/entities/user.entity';
     }),
     inject: [ConfigService],
   }),
+    AuthModule,
   ],
 })
 export class AppModule { }

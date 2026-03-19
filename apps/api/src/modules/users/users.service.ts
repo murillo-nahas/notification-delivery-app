@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { UserEntity } from './entities/user.entity';
+import { UserEntity, UserRole } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -18,5 +18,12 @@ export class UsersService {
     const user = this.userRepository.create(data);
 
     return this.userRepository.save(user);
+  }
+
+  async findAll(role?: UserRole): Promise<UserEntity[]> {
+    return this.userRepository.find({
+      where: role ? { role } : {},
+      select: ['id', 'name', 'email', 'role', 'createdAt'],
+    });
   }
 }

@@ -42,4 +42,7 @@ export class NotificationEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column({ type: 'timestamp', nullable: true, default: null })
+  readAt: Date | null;
 }

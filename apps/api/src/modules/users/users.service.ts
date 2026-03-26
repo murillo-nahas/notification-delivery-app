@@ -26,4 +26,8 @@ export class UsersService {
       select: ['id', 'name', 'email', 'role', 'createdAt'],
     });
   }
+
+  async findById(id: string): Promise<UserEntity | null> {
+    return this.userRepository.findOne({ where: { id } });
+  }
 }

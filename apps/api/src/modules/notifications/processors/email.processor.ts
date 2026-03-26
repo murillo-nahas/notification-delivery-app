@@ -8,12 +8,13 @@ import { ConfigService } from '@nestjs/config';
 
 @Processor('email')
 export class EmailProcessor extends WorkerHost {
+  private readonly resend: Resend;
+
   constructor(private readonly notificationsService: NotificationsService, private readonly configService: ConfigService, private readonly usersService: UsersService) {
     super();
     this.resend = new Resend(this.configService.get('RESEND_API_KEY'));
   }
 
-  private readonly resend: Resend;
 
   async process(job: Job<NotificationEntity>): Promise<void> {
     const notification = job.data;

@@ -8,6 +8,7 @@ import { EmailProcessor } from './processors/email.processor';
 import { PushProcessor } from './processors/push.processor';
 import { RealtimeProcessor } from './processors/realtime.processor';
 import { SmsProcessor } from './processors/sms.processor';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([NotificationEntity]),
@@ -16,7 +17,8 @@ import { SmsProcessor } from './processors/sms.processor';
     { name: 'sms' },
     { name: 'push' },
     { name: 'realtime' },
-  )
+  ),
+    UsersModule,
   ],
   controllers: [NotificationsController],
   providers: [NotificationsService, EmailProcessor, SmsProcessor, PushProcessor, RealtimeProcessor],

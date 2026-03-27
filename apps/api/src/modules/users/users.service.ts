@@ -14,7 +14,7 @@ export class UsersService {
     return this.userRepository.findOne({ where: { email } });
   }
 
-  async create(data: { name: string; phoneNumber: string; email: string; passwordHash: string }): Promise<UserEntity> {
+  async create(data: { name: string; phoneNumber: string | null; email: string; passwordHash: string }): Promise<UserEntity> {
     const user = this.userRepository.create(data);
 
     return this.userRepository.save(user);

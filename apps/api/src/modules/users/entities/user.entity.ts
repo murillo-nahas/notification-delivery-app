@@ -14,8 +14,8 @@ export class UserEntity {
   @Column()
   name: string;
 
-  @Column()
-  phoneNumber: string;
+  @Column({ type: 'varchar', nullable: true })
+  phoneNumber: string | null;
 
   @Column({ unique: true })
   email: string;

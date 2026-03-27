@@ -14,7 +14,7 @@ export class UsersService {
     return this.userRepository.findOne({ where: { email } });
   }
 
-  async create(data: { name: string; email: string; passwordHash: string }): Promise<UserEntity> {
+  async create(data: { name: string; phoneNumber: string; email: string; passwordHash: string }): Promise<UserEntity> {
     const user = this.userRepository.create(data);
 
     return this.userRepository.save(user);
@@ -23,7 +23,7 @@ export class UsersService {
   async findAll(role?: UserRole): Promise<UserEntity[]> {
     return this.userRepository.find({
       where: role ? { role } : {},
-      select: ['id', 'name', 'email', 'role', 'createdAt'],
+      select: ['id', 'name', 'phoneNumber', 'email', 'role', 'createdAt'],
     });
   }
 

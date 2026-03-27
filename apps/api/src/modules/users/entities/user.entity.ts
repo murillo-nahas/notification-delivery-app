@@ -14,6 +14,9 @@ export class UserEntity {
   @Column()
   name: string;
 
+  @Column()
+  phoneNumber: string;
+
   @Column({ unique: true })
   email: string;
 

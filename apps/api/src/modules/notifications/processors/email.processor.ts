@@ -30,8 +30,8 @@ export class EmailProcessor extends WorkerHost {
     const { error } = await this.resend.emails.send({
       from: 'onboarding@resend.dev',
       to: user.email,
-      subject: 'Notification',
-      html: `<p>This is a test email from Resend to a big guy</p>`
+      subject: 'Zzzling! You have a new notification.',
+      html: `${notification.message}`
     });
 
     if (error) {

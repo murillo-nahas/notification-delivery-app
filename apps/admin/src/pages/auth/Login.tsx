@@ -6,46 +6,50 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AuthLayout } from "./components/auth-layout";
 
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PasswordInput } from "@/components/ui/password-input";
 
 const loginSchema = z.object({
-  email: z.email('Email is required'),
-  password: z.string().min(6, 'Password should have at least 6 characters'),
-})
+  email: z.email("Email is required"),
+  password: z.string().min(6, "Password should have at least 6 characters"),
+});
 
-type LoginSchema = z.infer<typeof loginSchema>
+type LoginSchema = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
-    mode: 'onBlur',
+    mode: "onBlur",
     defaultValues: {
-      email: '',
-      password: ''
-    }
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = (data: LoginSchema): void => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
     <AuthLayout>
       <div className="max-w-md w-full px-8">
         <h1 className="text-xl font-bold text-foreground">Welcome to Admin</h1>
-        <p className="mt-1 mb-4 text-sm text-muted-foreground">
-          Login to your account to continue
-        </p>
+        <p className="mt-1 mb-4 text-sm text-muted-foreground">Login to your account to continue</p>
 
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-
             <FormField
               control={form.control}
-              name='email'
+              name="email"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
@@ -76,12 +80,16 @@ export default function Login() {
                 Login
               </Button>
             </div>
-
           </form>
         </Form>
 
-        <p className="mt-6 text-sm text-muted-foreground">Does not have an account? <Link to="/register" className="text-primary">Click here to register.</Link></p>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Does not have an account?{" "}
+          <Link to="/register" className="text-primary">
+            Click here to register.
+          </Link>
+        </p>
       </div>
     </AuthLayout>
-  )
-} 
+  );
+}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
-import { AuthLayout } from './components/AuthLayout';
+import { AuthLayout } from './components/auth-layout';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';

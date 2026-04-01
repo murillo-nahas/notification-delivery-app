@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
-import Dashboard from './pages/Dashboard';
+import NotFound from './pages/not-found';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
-import NotFound from './pages/NotFound';
+import Dashboard from './pages/Dashboard';
 
 export default function App() {
   return (

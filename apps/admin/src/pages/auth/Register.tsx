@@ -1,10 +1,12 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { ArrowLeft } from "lucide-react";
 
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useRegister } from "@/hooks/use-register";
 
 import { AuthLayout } from "./components/auth-layout";
 
@@ -19,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PasswordInput } from "@/components/ui/password-input";
+import { toast } from "sonner";
 
 const registerSchema = z.object({
   name: z.string("Name is required"),
@@ -30,6 +33,9 @@ const registerSchema = z.object({
 type RegisterSchema = z.infer<typeof registerSchema>;
 
 export default function Register() {
+  const { mutate, isPending } = useRegister();
+  const navigate = useNavigate();
+
   const form = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
     mode: "onBlur",
@@ -42,7 +48,19 @@ export default function Register() {
   });
 
   const onSubmit = (data: RegisterSchema): void => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => {
+        toast.success("Registered successfully, please login to continue");
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+        console.log(error);
+      },
+    });
   };
 
   return (
@@ -116,8 +134,8 @@ export default function Register() {
             />
 
             <div className="mt-4">
-              <Button variant="default" type="submit" className="mt-4 w-full">
-                Create account
+              <Button disabled={isPending} variant="default" type="submit" className="mt-4 w-full">
+                {isPending ? "Creating account..." : "Create account"}
               </Button>
             </div>
           </form>

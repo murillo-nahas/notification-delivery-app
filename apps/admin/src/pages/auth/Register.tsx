@@ -1,10 +1,13 @@
 import { Link } from 'react-router';
 import { ArrowLeft } from 'lucide-react';
-import { AuthLayout } from './components/auth-layout';
+
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
+
+import { AuthLayout } from './components/auth-layout';
+
+import { Form, FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -46,6 +49,7 @@ export default function Register() {
 
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+
             <FormField
               control={form.control}
               name="name"
@@ -103,6 +107,7 @@ export default function Register() {
                 Create account
               </Button>
             </div>
+
           </form>
         </Form>
       </div>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+
 import { ArrowLeft } from 'lucide-react';
 
 import { z } from 'zod';
@@ -7,14 +8,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { AuthLayout } from './components/auth-layout';
 
-import { Form, FormField, FormItem, FormLabel, FormControl } from '@/components/ui/form';
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { PasswordInput } from '@/components/ui/password-input';
 
 const registerSchema = z.object({
-  name: z.string().min(2, 'Name is too short'),
-  email: z.email('Email invalid'),
-  phoneNumber: z.string().min(10, 'Phone number is too short'),
+  name: z.string('Name is required'),
+  email: z.email('Email is required'),
+  phoneNumber: z.string().min(10, 'Phone number should have at least 10 characters'),
   password: z.string().min(6, 'Password should have at least 6 characters'),
 });
 
@@ -23,6 +25,7 @@ type RegisterSchema = z.infer<typeof registerSchema>;
 export default function Register() {
   const form = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
+    mode: 'onBlur',
     defaultValues: {
       name: '',
       email: '',
@@ -59,6 +62,7 @@ export default function Register() {
                   <FormControl>
                     <Input placeholder="Enter your name" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -72,6 +76,7 @@ export default function Register() {
                   <FormControl>
                     <Input placeholder="Enter your email" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -85,6 +90,7 @@ export default function Register() {
                   <FormControl>
                     <Input placeholder="Enter your phone number" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -96,8 +102,9 @@ export default function Register() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="********" {...field} />
+                    <PasswordInput placeholder="********" {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -110,6 +117,8 @@ export default function Register() {
 
           </form>
         </Form>
+
+        <p className="mt-6 text-sm text-muted-foreground">Already have an account? <Link to="/login" className="text-primary">Click here to login.</Link></p>
       </div>
     </AuthLayout>
   );

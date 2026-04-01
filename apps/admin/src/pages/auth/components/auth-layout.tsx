@@ -1,7 +1,7 @@
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
-      <div className="relative w-[30%] overflow-hidden bg-gray-950 flex items-center justify-center">
+      <div className="relative w-[65%] overflow-hidden bg-gray-950 flex items-center justify-center">
         <div
           className="absolute inset-0 opacity-100"
           style={{
@@ -23,7 +23,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
           </h1>
         </div>
       </div>
-      <div className="w-[70%] flex items-center justify-center">{children}</div>
+      <div className="w-[35%] flex items-center justify-center">{children}</div>
     </div>
   );
 }

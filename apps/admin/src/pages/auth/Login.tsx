@@ -42,7 +42,7 @@ export default function Login() {
   const onSubmit = (data: LoginSchema): void => {
     mutate(data, {
       onSuccess: () => {
-        toast.success("Registered successfully, please login to continue");
+        toast.success("Logged in successfully");
       },
       onError: (error) => {
         toast.error(error.message);

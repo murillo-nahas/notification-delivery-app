@@ -5,6 +5,7 @@ import Register from "./pages/auth/register";
 import Home from "./pages/home";
 import RootRedirect from "./components/root-redirect";
 import ProtectedRoute from "./components/protected-route";
+import AppLayout from "./components/app-layout";
 
 export default function App() {
   return (
@@ -15,7 +16,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
+          <Route element={<AppLayout />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

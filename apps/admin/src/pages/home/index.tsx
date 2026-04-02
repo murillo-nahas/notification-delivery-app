@@ -1,3 +1,5 @@
+import NotificationForm from "./components/notification-form";
+
 export default function Home() {
   return (
     <div>
@@ -6,7 +8,7 @@ export default function Home() {
         Dispatch a notification to one or more users across any channel.
       </p>
       <div className="mt-8 border border-border rounded-lg p-6 bg-card">
-        <p className="text-sm text-muted-foreground">Form goes here.</p>
+        <NotificationForm />
       </div>
     </div>
   );

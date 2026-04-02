@@ -27,5 +27,10 @@ export const api = {
         method: "POST",
         body: JSON.stringify(data),
       }),
+    login: (data: { email: string; password: string }) =>
+      fetchApi<{ accessToken: string }>("/auth/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
   },
 };

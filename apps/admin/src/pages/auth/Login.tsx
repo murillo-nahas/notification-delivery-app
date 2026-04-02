@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 import z from "zod";
 import { useForm } from "react-hook-form";
@@ -29,7 +29,6 @@ type LoginSchema = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const { mutate, isPending } = useLogin();
-  const navigate = useNavigate();
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -90,7 +89,7 @@ export default function Login() {
 
             <div className="mt-4">
               <Button disabled={isPending} variant="default" type="submit" className="mt-4 w-full">
-                {isPending ? 'Logging...' : 'Login'}
+                {isPending ? "Logging..." : "Login"}
               </Button>
             </div>
           </form>

@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useContext, useState } from "react";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 interface AuthUser {
   userId: string;
@@ -17,7 +17,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem("accessToken");
 
     if (!token) {
       return null;
@@ -27,27 +27,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = (token: string): void => {
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem("accessToken", token);
 
     setUser(jwtDecode<AuthUser>(token));
-  }
+  };
 
   const logout = (): void => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
 
     setUser(null);
-  }
+  };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
+    throw new Error("useAuth must be used within AuthProvider");
   }
 
   return context;

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import z from "zod";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PasswordInput } from "@/components/ui/password-input";
+import { useLogin } from "@/hooks/use-login";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   email: z.email("Email is required"),
@@ -26,6 +28,9 @@ const loginSchema = z.object({
 type LoginSchema = z.infer<typeof loginSchema>;
 
 export default function Login() {
+  const { mutate, isPending } = useLogin();
+  const navigate = useNavigate();
+
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: "onBlur",
@@ -36,7 +41,15 @@ export default function Login() {
   });
 
   const onSubmit = (data: LoginSchema): void => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => {
+        toast.success("Registered successfully, please login to continue");
+      },
+      onError: (error) => {
+        toast.error(error.message);
+        console.log(error);
+      },
+    });
   };
 
   return (
@@ -76,8 +89,8 @@ export default function Login() {
             />
 
             <div className="mt-4">
-              <Button variant="default" type="submit" className="mt-4 w-full">
-                Login
+              <Button disabled={isPending} variant="default" type="submit" className="mt-4 w-full">
+                {isPending ? 'Logging...' : 'Login'}
               </Button>
             </div>
           </form>

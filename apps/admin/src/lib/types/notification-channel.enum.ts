@@ -4,4 +4,3 @@ export enum NotificationChannel {
   PUSH = "PUSH",
   REALTIME = "REALTIME",
 }
-

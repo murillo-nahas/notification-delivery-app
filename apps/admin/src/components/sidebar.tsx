@@ -1,15 +1,15 @@
-import { LayoutDashboard, UserCircle } from 'lucide-react';
+import { LayoutDashboard, UserCircle } from "lucide-react";
 
 const navItems = [
   {
-    label: 'Home',
+    label: "Home",
     icon: LayoutDashboard,
-    href: '/home',
+    href: "/home",
   },
   {
-    label: 'Account details',
+    label: "Account details",
     icon: UserCircle,
-    href: '/account',
+    href: "/account",
   },
 ];
 

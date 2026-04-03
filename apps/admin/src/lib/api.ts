@@ -1,4 +1,6 @@
+import { NotificationSchema } from "./schemas/notifications";
 import { UserSchema } from "./schemas/user";
+import { NotificationChannel } from "./types/notification-channel.enum";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -36,8 +38,16 @@ export const api = {
       }),
   },
   users: {
-    findAll: () => fetchApi<UserSchema[]>("/users", {
-      method: "GET",
-    }),
-  }
+    findAll: () =>
+      fetchApi<UserSchema[]>("/users", {
+        method: "GET",
+      }),
+  },
+  notifications: {
+    createNotification: (data: { userId: string; channel: NotificationChannel; message: string }) =>
+      fetchApi<NotificationSchema>("/notifications", {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
+  },
 };

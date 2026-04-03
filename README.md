@@ -31,6 +31,13 @@ apps/
 └── api/      # NestJS API gateway + queue processors (port 3001)
 ```
 
+## Notification channels implemented
+
+- [x] Email
+- [x] SMS
+- [ ] Push notification
+- [ ] Realtime
+
 ## Notification Payload
 
 ```ts

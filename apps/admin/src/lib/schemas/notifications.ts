@@ -1,5 +1,6 @@
 import z from "zod";
-import { NotificationChannel, NotificationStatus } from "../types/notification-channel.enum";
+import { NotificationChannel } from "../types/notification-channel.enum";
+import { NotificationStatus } from "../types/notification-status.enum";
 
 export const notificationSchema = z.object({
   userId: z.string(),
